@@ -19,6 +19,33 @@ This API serves a React Native mobile app that lets users track their book colle
 
 ---
 
+## Architecture
+
+The codebase follows a three-layer MVC-style pattern:
+
+```
+Request → Router → Controller → Model → Firestore
+```
+
+| Layer | Location | Responsibility |
+|---|---|---|
+| **Router** | `functions/Routes/usersRouter.js` | Maps HTTP methods and URL patterns to controller functions |
+| **Controller** | `functions/Controllers/usersControllers.js` | Extracts params/body from the request, calls the model, and sends the HTTP response |
+| **Model** | `functions/Models/usersModels.js` | Contains all database logic — builds and executes Firestore queries and returns plain data |
+| **Database** | Firestore (via Firebase Admin SDK) | NoSQL document store; connection initialised in `functions/connection.js` |
+
+A typical request flow looks like this:
+
+1. Express receives `POST /api/users/alice123/books`
+2. The router matches the path and delegates to `postBookLibrary` in the controller
+3. The controller extracts `username` from `req.params` and the book data from `req.body`, then calls `newBookLibrary()` in the model
+4. The model writes the document to Firestore under `users/alice123/books/{bookId}` and returns the saved data
+5. The controller sends a `201` response with the returned data
+
+This separation means database logic is never mixed into route handlers, making each layer independently readable and replaceable.
+
+---
+
 ## Tech Stack
 
 | Layer | Technology |
