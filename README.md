@@ -2,8 +2,8 @@
 
 A RESTful API for a social book-sharing app. Users can manage a personal book library and wishlist, connect with friends, and lend or borrow each other's books.
 
-**Live API:** https://hosting-api-yiyu.onrender.com/api
-**Frontend repo:** https://github.com/Array-of-Sunshine-Library-App/library-app
+**Live API:** https://readshare-api.onrender.com/api
+**Frontend repo:** https://github.com/J-greaves/readshare
 
 ---
 
@@ -77,7 +77,7 @@ The API will be available at `http://localhost:3000`.
 ### Full endpoint reference
 
 ```
-GET https://hosting-api-yiyu.onrender.com/api/endpoints
+GET https://readshare-api.onrender.com/api/endpoints
 ```
 
 Returns a JSON object documenting every available endpoint with example request bodies and responses.
@@ -85,7 +85,7 @@ Returns a JSON object documenting every available endpoint with example request 
 ### Health check
 
 ```
-GET https://hosting-api-yiyu.onrender.com/api/test
+GET https://readshare-api.onrender.com/api/test
 ```
 
 ---
@@ -97,7 +97,7 @@ All examples below use the live Render deployment. Replace the base URL with `ht
 ### Create a user
 
 ```bash
-curl -X POST https://hosting-api-yiyu.onrender.com/api/users/newuser \
+curl -X POST https://readshare-api.onrender.com/api/users/newuser \
   -H "Content-Type: application/json" \
   -d '{"username": "alice123", "name": "Alice"}'
 ```
@@ -109,7 +109,7 @@ curl -X POST https://hosting-api-yiyu.onrender.com/api/users/newuser \
 ### Add a book to a library
 
 ```bash
-curl -X POST https://hosting-api-yiyu.onrender.com/api/users/alice123/books \
+curl -X POST https://readshare-api.onrender.com/api/users/alice123/books \
   -H "Content-Type: application/json" \
   -d '{
     "bookId": "book001",
@@ -128,13 +128,13 @@ curl -X POST https://hosting-api-yiyu.onrender.com/api/users/alice123/books \
 ### Get all lendable books for a user
 
 ```bash
-curl https://hosting-api-yiyu.onrender.com/api/users/alice123/books?lendable=true
+curl https://readshare-api.onrender.com/api/users/alice123/books?lendable=true
 ```
 
 ### Send a friend request
 
 ```bash
-curl -X POST https://hosting-api-yiyu.onrender.com/api/users/alice123/friendrequests \
+curl -X POST https://readshare-api.onrender.com/api/users/alice123/friendrequests \
   -H "Content-Type: application/json" \
   -d '{"username": "bob456"}'
 ```
@@ -142,7 +142,7 @@ curl -X POST https://hosting-api-yiyu.onrender.com/api/users/alice123/friendrequ
 ### Request to borrow a book
 
 ```bash
-curl -X POST https://hosting-api-yiyu.onrender.com/api/users/bob456/books/book001/requestlend/alice123
+curl -X POST https://readshare-api.onrender.com/api/users/bob456/books/book001/requestlend/alice123
 ```
 
 ---
